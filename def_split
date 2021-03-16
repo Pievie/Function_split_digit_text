@@ -1,0 +1,12 @@
+import pandas as pd
+def Split_df(df):
+    df_num= pd.DataFrame(df.index).drop(0, axis=1)
+    df_txt= pd.DataFrame(df.index).drop(0, axis=1) #drop index column
+    for column in list(df):
+        dtype   = df[column].dtypes
+        if dtype == np.int64 or dtype ==np.float64  : 
+            print(column,':',df[column].dtypes)
+            df_num = pd.merge(df_num,df[column],left_index=True,right_index=True)
+        else : 
+            df_txt = pd.merge(df_txt,df[column],left_index=True,right_index=True)
+    return df_num, df_txt 
